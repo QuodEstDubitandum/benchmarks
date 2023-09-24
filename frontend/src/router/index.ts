@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import DataTable from '../components/DataTable.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,32 +7,32 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: DataTable
     },
     {
       path: '/loop',
       name: 'loop',
-      component: HomeView
+      component: DataTable
     },
     {
       path: '/serialization',
       name: 'serialization',
-      component: HomeView
+      component: DataTable
     },
     {
       path: '/file',
       name: 'file',
-      component: HomeView
+      component: DataTable
     },
     {
       path: '/db-query',
       name: 'db-query',
-      component: HomeView
+      component: DataTable
     },
     {
       path: '/db-update',
       name: 'db-update',
-      component: HomeView
+      component: DataTable
     }
     // {
     //   path: '/about',

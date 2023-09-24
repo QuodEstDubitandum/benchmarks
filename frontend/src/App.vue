@@ -14,16 +14,24 @@ import { RouterLink, RouterView } from 'vue-router'
     <RouterLink to="/"><img class="home-icon" src="/home.png" /></RouterLink>
   </div>
 
-  <RouterView />
+  <div class="container">
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>
+.container {
+  width: 70vw;
+  margin: auto;
+  display: flex;
+  padding: 100px 0 100px 0;
+}
 .nav-menu {
   display: flex;
   flex-direction: row;
   width: 100vw;
   justify-content: space-between;
-  padding: 30px 100px 30px 100px;
+  padding: 30px 100px 0px 100px;
 }
 
 .nav-button {
@@ -34,8 +42,14 @@ import { RouterLink, RouterView } from 'vue-router'
   font-size: large;
 }
 
-a {
+.nav-button > .router-link-active {
+  text-decoration: underline; /* This underlines the active link */
   color: #079a1d;
+}
+
+a {
+  color: white;
+  text-decoration: none;
 }
 
 .home {
