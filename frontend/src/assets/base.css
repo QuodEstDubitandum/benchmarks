@@ -100,8 +100,7 @@ body {
   position: relative;
   grid-column: 2;
   background-color: white;
-  height: calc(100% + 10px);
-  top: -10px;
+  height: calc(100% + 80px);
   width: 1px;
 }
 
@@ -110,4 +109,45 @@ body {
   background-color: white;
   height: 1px;
   width: 100%;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr) 1px repeat(3, 1fr);
+  color: white;
+  justify-items: center;
+  align-items: center;
+  row-gap: 80px;
+  column-gap: 20px;
+  text-align: center;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.ping {
+  height: 15px;
+  width: 15px;
+  background-color: white;
+  border-radius: 100%;
+  animation-duration: 1s;
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
 }

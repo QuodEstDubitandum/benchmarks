@@ -4,29 +4,23 @@ import LoopTable from '../components/Tables/LoopTable.vue'
 
 <template>
   <main style="width: 100%; height: fit-content; position: relative">
-    <div class="grid">
+    <div class="grid" style="row-gap: 20px">
       <p>Tests</p>
-      <div class="vertical-seperator" style="top: 0"></div>
+      <div class="vertical-seperator" style="top: 20px"></div>
       <p>Go</p>
       <p>NodeJS</p>
       <p>Python</p>
       <div class="horizontal-seperator"></div>
-      <div v-if="$route.path === '/loop'"><LoopTable /></div>
-      <div v-else-if="$route.path === '/serialization'"></div>
-      <div v-else-if="$route.path === '/file'"></div>
-      <div v-else-if="$route.path === '/db-query'"></div>
-      <div v-else></div>
+    </div>
+    <div style="width: 100%; height: 40px"></div>
+    <div class="grid">
+      <LoopTable v-if="$route.path === '/loop'" />
+      <LoopTable v-if="$route.path === '/serialization'" />
+      <LoopTable v-if="$route.path === '/file'" />
+      <LoopTable v-if="$route.path === '/db-query'" />
+      <LoopTable v-if="$route.path === '/db-update'" />
     </div>
   </main>
 </template>
 
-<style scoped>
-.grid {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr) 1px repeat(3, 1fr);
-  color: white;
-  justify-items: center;
-  align-content: center;
-  gap: 10px;
-}
-</style>
+<style scoped></style>
