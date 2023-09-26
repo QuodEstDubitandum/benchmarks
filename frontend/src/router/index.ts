@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import DataTable from '../components/DataTable.vue'
+import UsageGuide from '../components/UsageGuide.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +8,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: DataTable
+      component: UsageGuide
     },
     {
       path: '/loop',

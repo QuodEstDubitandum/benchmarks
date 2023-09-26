@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LoopTable from '../components/Tables/LoopTable.vue'
+import AlgorithmTable from '../components/Tables/AlgorithmTable.vue'
 </script>
 
 <template>
@@ -14,11 +14,11 @@ import LoopTable from '../components/Tables/LoopTable.vue'
     </div>
     <div style="width: 100%; height: 40px"></div>
     <div class="grid">
-      <LoopTable v-if="$route.path === '/loop'" />
-      <LoopTable v-if="$route.path === '/serialization'" />
-      <LoopTable v-if="$route.path === '/file'" />
-      <LoopTable v-if="$route.path === '/db-query'" />
-      <LoopTable v-if="$route.path === '/db-update'" />
+      <AlgorithmTable v-if="$route.path === '/loop'" />
+      <AlgorithmTable v-if="$route.path === '/serialization'" />
+      <AlgorithmTable v-if="$route.path === '/file'" />
+      <AlgorithmTable v-if="$route.path === '/db-query'" />
+      <AlgorithmTable v-if="$route.path === '/db-update'" />
     </div>
   </main>
 </template>
