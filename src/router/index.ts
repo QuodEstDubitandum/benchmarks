@@ -11,8 +11,8 @@ const router = createRouter({
       component: UsageGuide
     },
     {
-      path: '/loop',
-      name: 'loop',
+      path: '/algorithms',
+      name: 'algorithms',
       component: DataTable
     },
     {

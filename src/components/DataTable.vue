@@ -14,7 +14,7 @@ import AlgorithmTable from '../components/Tables/AlgorithmTable.vue'
     </div>
     <div style="width: 100%; height: 40px"></div>
     <div class="grid">
-      <AlgorithmTable v-if="$route.path === '/loop'" />
+      <AlgorithmTable v-if="$route.path === '/algorithms'" />
       <AlgorithmTable v-if="$route.path === '/serialization'" />
       <AlgorithmTable v-if="$route.path === '/file'" />
       <AlgorithmTable v-if="$route.path === '/db-query'" />

@@ -17,6 +17,6 @@ const props = defineProps({
       v-if="!props.loading"
       @click="props.getData!(props.url)"
     ></i>
-    <i class="fa-solid fa-circle-play fa-xl" style="color: grey; cursor: pointer" v-else></i>
+    <i class="fa-solid fa-circle-play fa-xl" style="color: grey" v-else></i>
   </div>
 </template>

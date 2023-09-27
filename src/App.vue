@@ -4,7 +4,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <div class="nav-menu">
-    <div class="nav-button"><RouterLink to="/loop">Loops</RouterLink></div>
+    <div class="nav-button"><RouterLink to="/algorithms">Algorithms</RouterLink></div>
     <div class="nav-button"><RouterLink to="/serialization">Serialization</RouterLink></div>
     <div class="nav-button"><RouterLink to="/file">File Operations</RouterLink></div>
     <div class="nav-button"><RouterLink to="/db-query">Database Queries</RouterLink></div>
