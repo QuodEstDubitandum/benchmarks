@@ -15,7 +15,7 @@ func main(){
         return utils.MeasurePerformance(api.PrimeNumbers, &utils.Options{Context: c, N: 10000000})
     })
 
-	app.Get("/algorithms/fast_fibonacci", func(c *fiber.Ctx) error {
+	app.Get("/algorithms/fast-fibonacci", func(c *fiber.Ctx) error {
         return utils.MeasurePerformance(api.FastFibonacci, &utils.Options{Context: c, N: 1000000})
     })
 

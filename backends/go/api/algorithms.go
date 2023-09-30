@@ -30,7 +30,7 @@ func PrimeNumbers(opt *utils.Options){
 	fmt.Printf("Number of prime numbers until %d: %v", n, j)
 }
 
-// /fast_fibonacci
+// /fast-fibonacci
 func FastFibonacci(opt *utils.Options){
 	n := opt.N
 	baseMatrix := [2][2]*big.Int{
@@ -97,3 +97,5 @@ func divideArray(array []int) []int{
 
 	return array
 }
+
+// /two-sum

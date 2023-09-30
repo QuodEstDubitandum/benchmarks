@@ -28,26 +28,47 @@ async function getData(url: string) {
     let res: Response
     let time: string
     switch (url) {
-      case '/go/algorithms/prime':
+      case '/algorithms/prime':
         go_prime.value.loading = true
-        res = await fetch(url, { method: 'GET' })
+        nodejs_prime.value.loading = true
+
+        res = await fetch('/go' + url, { method: 'GET' })
         time = await res.text()
         go_prime.value.time = time
         go_prime.value.loading = false
+
+        res = await fetch('/nodejs' + url, { method: 'GET' })
+        time = await res.text()
+        nodejs_prime.value.time = time
+        nodejs_prime.value.loading = false
         break
-      case '/go/algorithms/fast_fibonacci':
+      case '/algorithms/fast-fibonacci':
         go_fibonacci.value.loading = true
-        res = await fetch(url, { method: 'GET' })
+        nodejs_fibonacci.value.loading = true
+
+        res = await fetch('/go' + url, { method: 'GET' })
         time = await res.text()
         go_fibonacci.value.time = time
         go_fibonacci.value.loading = false
+
+        res = await fetch('/nodejs' + url, { method: 'GET' })
+        time = await res.text()
+        nodejs_fibonacci.value.time = time
+        nodejs_fibonacci.value.loading = false
         break
-      case '/go/algorithms/quicksort':
+      case '/algorithms/quicksort':
         go_quicksort.value.loading = true
-        res = await fetch(url, { method: 'GET' })
+        nodejs_quicksort.value.loading = true
+
+        res = await fetch('/go' + url, { method: 'GET' })
         time = await res.text()
         go_quicksort.value.time = time
         go_quicksort.value.loading = false
+
+        res = await fetch('/nodejs' + url, { method: 'GET' })
+        time = await res.text()
+        nodejs_quicksort.value.time = time
+        nodejs_quicksort.value.loading = false
         break
     }
   } catch (err) {
@@ -61,7 +82,7 @@ async function getData(url: string) {
   <TestDescriptionVue
     :loading="loading"
     :get-data="getData"
-    :url="'/go/algorithms/prime'"
+    :url="'/algorithms/prime'"
     :description="'Calculate all prime numbers up to n=10.000.000'"
   />
   <div class="vertical-seperator"></div>
@@ -78,7 +99,7 @@ async function getData(url: string) {
   <TestDescriptionVue
     :loading="loading"
     :get-data="getData"
-    :url="'/go/algorithms/fast_fibonacci'"
+    :url="'/algorithms/fast-fibonacci'"
     :description="'Compute the fibonacci number for n=1.000.000'"
   />
   <div class="vertical-seperator"></div>
@@ -95,7 +116,7 @@ async function getData(url: string) {
   <TestDescriptionVue
     :loading="loading"
     :get-data="getData"
-    :url="'/go/algorithms/quicksort'"
+    :url="'/algorithms/quicksort'"
     :description="'Perform Quicksort on a badly sorted array for n=1.000.000'"
   />
   <div class="vertical-seperator"></div>
