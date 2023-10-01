@@ -9,7 +9,7 @@ const props = defineProps({
 
 <template>
   <div class="col">
-    <p>{{ props.description }}</p>
+    <p style="font-size: small">{{ props.description }}</p>
     <div style="margin-bottom: 27px"></div>
     <i
       class="fa-solid fa-circle-play fa-xl"

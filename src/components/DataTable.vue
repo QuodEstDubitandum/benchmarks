@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AlgorithmTable from '../components/Tables/AlgorithmTable.vue'
+import FileTable from '../components/Tables/FileTable.vue'
 </script>
 
 <template>
@@ -16,7 +17,7 @@ import AlgorithmTable from '../components/Tables/AlgorithmTable.vue'
     <div class="grid">
       <AlgorithmTable v-if="$route.path === '/algorithms'" />
       <AlgorithmTable v-if="$route.path === '/serialization'" />
-      <AlgorithmTable v-if="$route.path === '/file'" />
+      <FileTable v-if="$route.path === '/file'" />
       <AlgorithmTable v-if="$route.path === '/db-query'" />
       <AlgorithmTable v-if="$route.path === '/db-update'" />
     </div>

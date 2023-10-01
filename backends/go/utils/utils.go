@@ -10,7 +10,8 @@ import (
 type Options struct{
 	Context *fiber.Ctx
 	N int
-	QuicksortArray []int
+	Array []int
+	Cores int
 }
 
 func MeasurePerformance(f func(opt *Options), opt *Options) error {

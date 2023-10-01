@@ -4,21 +4,30 @@ import { Context, measurePerformance } from '../utils/utils'
 const router = express.Router()
 
 // router
-router.get('/prime', function (req, res) {
-  const time = measurePerformance(prime, { n: 10000000 })
+router.get('/prime', async function (req, res) {
+  const time = await measurePerformance(prime, { n: 10000000 }, false)
   res.send(time.toFixed(0))
 })
-router.get('/fast-fibonacci', function (req, res) {
-  const time = measurePerformance(fastFibonacci, { n: 1000000 })
+router.get('/fast-fibonacci', async function (req, res) {
+  const time = await measurePerformance(fastFibonacci, { n: 1000000 }, false)
   res.send(time.toFixed(0))
 })
-router.get('/quicksort', function (req, res) {
+router.get('/quicksort', async function (req, res) {
   const n = 1000000
   const arr = Array(n)
   for (let i = 0; i < arr.length; i++) {
     arr[i] = n - i
   }
-  const time = measurePerformance(quicksort, { n: 10000000, quickSortArray: arr })
+  const time = await measurePerformance(quicksort, { n: 10000000, array: arr }, false)
+  res.send(time.toFixed(0))
+})
+router.get('/two-sum', async function (req, res) {
+  const n = 1000000
+  const arr = Array(n)
+  for (let i = 0; i < arr.length; i++) {
+    arr[i] = i + 1
+  }
+  const time = await measurePerformance(twoSum, { n: n, array: arr }, false)
   res.send(time.toFixed(0))
 })
 
@@ -47,7 +56,7 @@ export function prime(ctx: Context) {
   console.log('Number of prime numbers until ' + n + ': ' + j)
 }
 
-// /fast_fibonacci
+// /fast-fibonacci
 function fastFibonacci(ctx: Context) {
   const n = ctx.n
   const baseMatrix = [
@@ -81,7 +90,7 @@ function matrixMult(a: bigint[][], b: bigint[][]): bigint[][] {
 
 // /quicksort
 function quicksort(ctx: Context) {
-  const baseArray = ctx.quickSortArray as number[]
+  const baseArray = ctx.array as number[]
 
   console.log(divideArray(baseArray, 0, baseArray.length - 1)[0])
 }
@@ -115,6 +124,31 @@ function divideArray(array: number[], left: number, right: number) {
   divideArray(array, j + 1, right)
 
   return array
+}
+
+// /two-sum
+function twoSum(ctx: Context) {
+  const n = ctx.n
+  const array = ctx.array as number[]
+  let count = 0
+  let complement
+  const map = new Map<number, number>()
+
+  for (const number of array) {
+    complement = n - number
+    if (map.has(complement)) {
+      count += map.get(complement)!
+    }
+
+    if (map.has(number)) {
+      const oldNumber = map.get(number)!
+      map.set(number, oldNumber + 1)
+    }
+    if (!map.has(number)) {
+      map.set(number, 1)
+    }
+  }
+  console.log(count)
 }
 
 export default router

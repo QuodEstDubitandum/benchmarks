@@ -14,6 +14,10 @@ const go_quicksort = ref({ time: '', loading: false })
 const nodejs_quicksort = ref({ time: '', loading: false })
 const python_quicksort = ref({ time: '', loading: false })
 
+const go_two_sum = ref({ time: '', loading: false })
+const nodejs_two_sum = ref({ time: '', loading: false })
+const python_two_sum = ref({ time: '', loading: false })
+
 // global loading state to disable buttons f.e.
 const loading = ref(false)
 function setLoading() {
@@ -69,6 +73,20 @@ async function getData(url: string) {
         time = await res.text()
         nodejs_quicksort.value.time = time
         nodejs_quicksort.value.loading = false
+        break
+      case '/algorithms/two-sum':
+        go_two_sum.value.loading = true
+        nodejs_two_sum.value.loading = true
+
+        res = await fetch('/go' + url, { method: 'GET' })
+        time = await res.text()
+        go_two_sum.value.time = time
+        go_two_sum.value.loading = false
+
+        res = await fetch('/nodejs' + url, { method: 'GET' })
+        time = await res.text()
+        nodejs_two_sum.value.time = time
+        nodejs_two_sum.value.loading = false
         break
     }
   } catch (err) {
@@ -128,5 +146,22 @@ async function getData(url: string) {
   <p v-else></p>
   <div class="ping" v-if="python_quicksort.loading"></div>
   <p v-else-if="python_quicksort.time">{{ python_quicksort.time }} ms</p>
+  <p v-else></p>
+
+  <TestDescriptionVue
+    :loading="loading"
+    :get-data="getData"
+    :url="'/algorithms/two-sum'"
+    :description="'Given an array of size n=1.000.000: Find the number of pairs in that array whose sum equals n'"
+  />
+  <div class="vertical-seperator"></div>
+  <div class="ping" v-if="go_two_sum.loading"></div>
+  <p v-else-if="go_two_sum.time">{{ go_two_sum.time }} ms</p>
+  <p v-else></p>
+  <div class="ping" v-if="nodejs_two_sum.loading"></div>
+  <p v-else-if="nodejs_two_sum.time">{{ nodejs_two_sum.time }} ms</p>
+  <p v-else></p>
+  <div class="ping" v-if="python_two_sum.loading"></div>
+  <p v-else-if="python_two_sum.time">{{ python_two_sum.time }} ms</p>
   <p v-else></p>
 </template>

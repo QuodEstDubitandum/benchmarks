@@ -68,7 +68,7 @@ func matrixMult(a [2][2]*big.Int, b [2][2]*big.Int) [2][2]*big.Int{
 
 // /quicksort
 func Quicksort(opt *utils.Options){
-	baseArray := opt.QuicksortArray
+	baseArray := opt.Array
 	
 	fmt.Println(divideArray(baseArray)[0])
 }
@@ -99,3 +99,16 @@ func divideArray(array []int) []int{
 }
 
 // /two-sum
+func TwoSum(opt *utils.Options){
+	n := opt.N
+	hashmap := make(map[int]int, n)
+	arr := opt.Array
+	count := 0
+
+	for _, number := range arr{
+		complement := n - number
+		count += hashmap[complement]
+		hashmap[number] += 1
+	}
+	fmt.Println(count)
+}
