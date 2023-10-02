@@ -4,7 +4,9 @@ import (
 	api "benchmarks/api"
 	utils "benchmarks/utils"
 	"fmt"
+	"os"
 	"runtime"
+	"strings"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -47,6 +49,42 @@ func main(){
 
 	app.Get("/files/write-parallel", func(c *fiber.Ctx) error {
 		return utils.MeasurePerformance(api.WriteFileParallel, &utils.Options{Context: c, N: 10000, Cores: cores})
+	})
+
+	app.Get("/files/read", func(c *fiber.Ctx) error {
+		// creating files
+		n := 1000000
+		data := strings.Repeat("Gotta go fast\n", n)
+		for i:=0; i<cores; i++{
+			file, _ := os.Create(fmt.Sprintf("test%d.txt", i))
+			file.WriteString(data)
+			file.Close()
+		}
+		// measuring performance of read
+		time := utils.MeasurePerformance(api.ReadFileSync, &utils.Options{Context: c, N: n, Cores: cores})
+		// deleting files
+		for i:=0; i<cores; i++{
+			os.Remove(fmt.Sprintf("test%d.txt", i))
+		}
+		return time
+	})
+
+	app.Get("/files/read-parallel", func(c *fiber.Ctx) error {
+		// creating files
+		n := 1000000
+		data := strings.Repeat("Gotta go fast\n", n)
+		for i:=0; i<cores; i++{
+			file, _ := os.Create(fmt.Sprintf("test%d.txt", i))
+			file.WriteString(data)
+			file.Close()
+		}
+		// measuring performance of read
+		time := utils.MeasurePerformance(api.ReadFileParallel, &utils.Options{Context: c, N: n, Cores: cores})
+		// deleting files
+		for i:=0; i<cores; i++{
+			os.Remove(fmt.Sprintf("test%d.txt", i))
+		}
+		return time
 	})
 
 	app.Listen(":3001")

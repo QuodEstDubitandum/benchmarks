@@ -16,7 +16,6 @@ import FileTable from '../components/Tables/FileTable.vue'
     <div style="width: 100%; height: 40px"></div>
     <div class="grid">
       <AlgorithmTable v-if="$route.path === '/algorithms'" />
-      <AlgorithmTable v-if="$route.path === '/serialization'" />
       <FileTable v-if="$route.path === '/file'" />
       <AlgorithmTable v-if="$route.path === '/db-query'" />
       <AlgorithmTable v-if="$route.path === '/db-update'" />

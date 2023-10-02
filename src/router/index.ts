@@ -16,11 +16,6 @@ const router = createRouter({
       component: DataTable
     },
     {
-      path: '/serialization',
-      name: 'serialization',
-      component: DataTable
-    },
-    {
       path: '/file',
       name: 'file',
       component: DataTable
