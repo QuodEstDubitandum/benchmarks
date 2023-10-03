@@ -3,20 +3,31 @@ package main
 import (
 	api "benchmarks/api"
 	utils "benchmarks/utils"
+	"database/sql"
 	"fmt"
 	"os"
 	"runtime"
 	"strings"
 
 	"github.com/gofiber/fiber/v2"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 
 func main(){
 	cores := runtime.NumCPU()
-	fmt.Println(cores)
 	app := fiber.New()
 
+	db, err := sql.Open("sqlite3", "./../../sqlite.db")
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
+
+	// only to create the db from the csv file
+	// database.Seed(db)
+	
+	
 	app.Get("/algorithms/prime", func(c *fiber.Ctx) error {
         return utils.MeasurePerformance(api.PrimeNumbers, &utils.Options{Context: c, N: 10000000})
     })
