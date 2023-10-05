@@ -2,6 +2,7 @@ package main
 
 import (
 	api "benchmarks/api"
+	"benchmarks/database"
 	utils "benchmarks/utils"
 	"database/sql"
 	"fmt"
@@ -23,6 +24,11 @@ func main(){
 		panic(err)
 	}
 	defer db.Close()
+
+	_, err = db.Exec("PRAGMA journal_mode=WAL;")
+	if err != nil {
+		panic(err)
+	}
 
 	// only to create the db from the csv file
 	// database.Seed(db)
@@ -95,6 +101,34 @@ func main(){
 		for i:=0; i<cores; i++{
 			os.Remove(fmt.Sprintf("test%d.txt", i))
 		}
+		return time
+	})
+
+	app.Get("/db/select", func(c *fiber.Ctx) error {
+		time := utils.MeasurePerformance(database.SelectQuery, &utils.Options{Context: c, N: 10, DB: db})
+		return time
+	})
+
+	app.Get("/db/insert", func(c *fiber.Ctx) error {
+		time := utils.MeasurePerformance(database.InsertQuery, &utils.Options{Context: c, N: 1000, DB: db})
+		_, err := db.Exec(`
+			DELETE FROM electric_cars
+			WHERE vin = "test" AND county = "test"
+		`)
+
+		if err != nil{
+			fmt.Println(err)
+		}
+		return time
+	})
+
+	app.Get("/db/update", func(c *fiber.Ctx) error {
+		time := utils.MeasurePerformance(database.UpdateQuery, &utils.Options{Context: c, N: 10, DB: db})
+		return time
+	})
+
+	app.Get("/db/delete", func(c *fiber.Ctx) error {
+		time := utils.MeasurePerformance(database.DeleteQuery, &utils.Options{Context: c, N: 10, DB: db})
 		return time
 	})
 

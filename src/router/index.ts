@@ -21,13 +21,13 @@ const router = createRouter({
       component: DataTable
     },
     {
-      path: '/db-query',
-      name: 'db-query',
+      path: '/db',
+      name: 'db',
       component: DataTable
     },
     {
-      path: '/db-update',
-      name: 'db-update',
+      path: '/json-image',
+      name: 'json-image',
       component: DataTable
     }
     // {

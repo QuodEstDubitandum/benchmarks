@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"database/sql"
 	"fmt"
 	"time"
 
@@ -12,6 +13,7 @@ type Options struct{
 	N int
 	Array []int
 	Cores int
+	DB *sql.DB
 }
 
 func MeasurePerformance(f func(opt *Options), opt *Options) error {

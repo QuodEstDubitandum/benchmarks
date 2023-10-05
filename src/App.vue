@@ -6,8 +6,10 @@ import { RouterLink, RouterView } from 'vue-router'
   <div class="nav-menu">
     <div class="nav-button"><RouterLink to="/algorithms">Algorithms</RouterLink></div>
     <div class="nav-button"><RouterLink to="/file">File Operations</RouterLink></div>
-    <div class="nav-button"><RouterLink to="/db-query">Database Queries</RouterLink></div>
-    <div class="nav-button"><RouterLink to="/db-update">Database Updates</RouterLink></div>
+    <div class="nav-button"><RouterLink to="/db">SQLite Operations</RouterLink></div>
+    <div class="nav-button">
+      <RouterLink to="/json-image">JSON and Image Operations</RouterLink>
+    </div>
   </div>
   <div class="home">
     <RouterLink to="/"><img class="home-icon" src="/home.png" /></RouterLink>

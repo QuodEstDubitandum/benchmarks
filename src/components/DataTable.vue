@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import AlgorithmTable from '../components/Tables/AlgorithmTable.vue'
 import FileTable from '../components/Tables/FileTable.vue'
+import DBTable from '../components/Tables/DBTable.vue'
+import JSONAndImageTable from '../components/Tables/JSONAndImageTable.vue'
 </script>
 
 <template>
@@ -17,8 +19,8 @@ import FileTable from '../components/Tables/FileTable.vue'
     <div class="grid">
       <AlgorithmTable v-if="$route.path === '/algorithms'" />
       <FileTable v-if="$route.path === '/file'" />
-      <AlgorithmTable v-if="$route.path === '/db-query'" />
-      <AlgorithmTable v-if="$route.path === '/db-update'" />
+      <DBTable v-if="$route.path === '/db'" />
+      <JSONAndImageTable v-if="$route.path === '/json-image'" />
     </div>
   </main>
 </template>
