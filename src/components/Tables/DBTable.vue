@@ -118,7 +118,7 @@ async function getData(url: string) {
     :loading="loading"
     :get-data="getData"
     :url="'/db/insert'"
-    :description="'Perform an INSERT query on a semilarge sqlite file n=1.000 times'"
+    :description="'Perform an INSERT query on a semilarge sqlite file n=10 times'"
   />
   <div class="vertical-seperator"></div>
   <div class="ping" v-if="go_insert.loading"></div>
@@ -135,7 +135,7 @@ async function getData(url: string) {
     :loading="loading"
     :get-data="getData"
     :url="'/db/update'"
-    :description="'Read NumOfCPUCores text files consisting of n=1.000.000 lines each synchronously'"
+    :description="'Perform an UPDATE query with a WHERE condition on a semilarge sqlite file n=2 times'"
   />
   <div class="vertical-seperator"></div>
   <div class="ping" v-if="go_read.loading"></div>
@@ -152,7 +152,7 @@ async function getData(url: string) {
     :loading="loading"
     :get-data="getData"
     :url="'/db/delete'"
-    :description="'Read NumOfCPUCores text files consisting of n=1.000.000 lines each in parallel'"
+    :description="'Perform a DELETE query with a WHERE condition on a semilarge sqlite file n=10 times'"
   />
   <div class="vertical-seperator"></div>
   <div class="ping" v-if="go_read_parallel.loading"></div>

@@ -25,10 +25,10 @@ func main(){
 	}
 	defer db.Close()
 
-	_, err = db.Exec("PRAGMA journal_mode=WAL;")
-	if err != nil {
-		panic(err)
-	}
+	// _, err = db.Exec("PRAGMA journal_mode=WAL;")
+	// if err != nil {
+	// 	panic(err)
+	// }
 
 	// only to create the db from the csv file
 	// database.Seed(db)
@@ -110,7 +110,7 @@ func main(){
 	})
 
 	app.Get("/db/insert", func(c *fiber.Ctx) error {
-		time := utils.MeasurePerformance(database.InsertQuery, &utils.Options{Context: c, N: 1000, DB: db})
+		time := utils.MeasurePerformance(database.InsertQuery, &utils.Options{Context: c, N: 10, DB: db})
 		_, err := db.Exec(`
 			DELETE FROM electric_cars
 			WHERE vin = "test" AND county = "test"
@@ -128,7 +128,7 @@ func main(){
 	})
 
 	app.Get("/db/delete", func(c *fiber.Ctx) error {
-		time := utils.MeasurePerformance(database.DeleteQuery, &utils.Options{Context: c, N: 10, DB: db})
+		time := database.DeleteQuery(&utils.Options{Context: c, N: 50, DB: db}) 
 		return time
 	})
 
