@@ -2,6 +2,26 @@ export interface Context {
   n: number
   array?: number[]
   cores?: number
+  object?: {
+    a: string
+    b: string
+    c: string
+    d: string
+    e: string
+    f: string
+    g: string
+    h: string
+    i: string
+    j: string
+    k: string
+    l: string
+    m: string
+    n: string
+    o: string
+    p: string
+    q: string
+  }
+  deserializeString?: string
 }
 
 export async function measurePerformance(

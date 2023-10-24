@@ -7,6 +7,25 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 )
+type SerializeObject struct {
+	A string `json:"a"`
+	B string `json:"b"`
+	C string `json:"c"`
+	D string `json:"d"`
+	E string `json:"e"`
+	F string `json:"f"`
+	G string `json:"g"`
+	H string `json:"h"`
+	I string `json:"i"`
+	J string `json:"j"`
+	K string `json:"k"`
+	L string `json:"l"`
+	M string `json:"m"`
+	N string `json:"n"`
+	O string `json:"o"`
+	P string `json:"p"`
+	Q string `json:"q"`
+}
 
 type Options struct{
 	Context *fiber.Ctx
@@ -14,6 +33,7 @@ type Options struct{
 	Array []int
 	Cores int
 	DB *sql.DB
+	Obj SerializeObject
 }
 
 func MeasurePerformance(f func(opt *Options), opt *Options) error {

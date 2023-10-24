@@ -2,13 +2,13 @@
 import { ref } from 'vue'
 import TestDescriptionVue from '../TestDescription.vue'
 
-const go_write = ref({ time: '', loading: false })
-const nodejs_write = ref({ time: '', loading: false })
-const python_write = ref({ time: '', loading: false })
+const go_serialize = ref({ time: '', loading: false })
+const nodejs_serialize = ref({ time: '', loading: false })
+const python_serialize = ref({ time: '', loading: false })
 
-const go_write_parallel = ref({ time: '', loading: false })
-const nodejs_write_parallel = ref({ time: '', loading: false })
-const python_write_parallel = ref({ time: '', loading: false })
+const go_deserialize = ref({ time: '', loading: false })
+const nodejs_deserialize = ref({ time: '', loading: false })
+const python_deserialize = ref({ time: '', loading: false })
 
 const go_read = ref({ time: '', loading: false })
 const nodejs_read = ref({ time: '', loading: false })
@@ -31,34 +31,63 @@ async function getData(url: string) {
   try {
     let res: Response
     let time: string
+    const sampleString =
+      'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.'
+    const deserializeObject = {
+      a: sampleString,
+      b: sampleString,
+      c: sampleString,
+      d: sampleString,
+      e: sampleString,
+      f: sampleString,
+      g: sampleString,
+      h: sampleString,
+      i: sampleString,
+      j: sampleString,
+      k: sampleString,
+      l: sampleString,
+      m: sampleString,
+      n: sampleString,
+      o: sampleString,
+      p: sampleString,
+      q: sampleString
+    }
     switch (url) {
-      case '/files/write':
-        go_write.value.loading = true
-        nodejs_write.value.loading = true
+      case '/json/serialize':
+        go_serialize.value.loading = true
+        nodejs_serialize.value.loading = true
 
         res = await fetch('/go' + url, { method: 'GET' })
         time = await res.text()
-        go_write.value.time = time
-        go_write.value.loading = false
+        go_serialize.value.time = time
+        go_serialize.value.loading = false
 
         res = await fetch('/nodejs' + url, { method: 'GET' })
         time = await res.text()
-        nodejs_write.value.time = time
-        nodejs_write.value.loading = false
+        nodejs_serialize.value.time = time
+        nodejs_serialize.value.loading = false
         break
-      case '/files/write-parallel':
-        go_write_parallel.value.loading = true
-        nodejs_write_parallel.value.loading = true
+      case '/json/deserialize':
+        go_deserialize.value.loading = true
+        nodejs_deserialize.value.loading = true
 
-        res = await fetch('/go' + url, { method: 'GET' })
+        res = await fetch('/go' + url, {
+          method: 'POST',
+          body: JSON.stringify(deserializeObject),
+          headers: { 'Content-Type': 'application/json' }
+        })
         time = await res.text()
-        go_write_parallel.value.time = time
-        go_write_parallel.value.loading = false
+        go_deserialize.value.time = time
+        go_deserialize.value.loading = false
 
-        res = await fetch('/nodejs' + url, { method: 'GET' })
+        res = await fetch('/nodejs' + url, {
+          method: 'POST',
+          body: JSON.stringify(deserializeObject),
+          headers: { 'Content-Type': 'application/json' }
+        })
         time = await res.text()
-        nodejs_write_parallel.value.time = time
-        nodejs_write_parallel.value.loading = false
+        nodejs_deserialize.value.time = time
+        nodejs_deserialize.value.loading = false
         break
       case '/files/read':
         go_read.value.loading = true
@@ -100,35 +129,35 @@ async function getData(url: string) {
   <TestDescriptionVue
     :loading="loading"
     :get-data="getData"
-    :url="'/files/write'"
-    :description="'Write n=10.000 lines to NumOfCPUCores text files one after another'"
+    :url="'/json/serialize'"
+    :description="'Serialize a semilarge JSON object n=10.000 times'"
   />
   <div class="vertical-seperator"></div>
-  <div class="ping" v-if="go_write.loading"></div>
-  <p v-else-if="go_write.time">{{ go_write.time }} ms</p>
+  <div class="ping" v-if="go_serialize.loading"></div>
+  <p v-else-if="go_serialize.time">{{ go_serialize.time }} ms</p>
   <p v-else></p>
-  <div class="ping" v-if="nodejs_write.loading"></div>
-  <p v-else-if="nodejs_write.time">{{ nodejs_write.time }} ms</p>
+  <div class="ping" v-if="nodejs_serialize.loading"></div>
+  <p v-else-if="nodejs_serialize.time">{{ nodejs_serialize.time }} ms</p>
   <p v-else></p>
-  <div class="ping" v-if="python_write.loading"></div>
-  <p v-else-if="python_write.time">{{ python_write.time }} ms</p>
+  <div class="ping" v-if="python_serialize.loading"></div>
+  <p v-else-if="python_serialize.time">{{ python_serialize.time }} ms</p>
   <p v-else></p>
 
   <TestDescriptionVue
     :loading="loading"
     :get-data="getData"
-    :url="'/files/write-parallel'"
-    :description="'Write n=10.000 lines to NumOfCPUCores text files in parallel'"
+    :url="'/json/deserialize'"
+    :description="'Deserialize a semilarge JSON object n=10.000 times'"
   />
   <div class="vertical-seperator"></div>
-  <div class="ping" v-if="go_write_parallel.loading"></div>
-  <p v-else-if="go_write_parallel.time">{{ go_write_parallel.time }} ms</p>
+  <div class="ping" v-if="go_deserialize.loading"></div>
+  <p v-else-if="go_deserialize.time">{{ go_deserialize.time }} ms</p>
   <p v-else></p>
-  <div class="ping" v-if="nodejs_write_parallel.loading"></div>
-  <p v-else-if="nodejs_write_parallel.time">{{ nodejs_write_parallel.time }} ms</p>
+  <div class="ping" v-if="nodejs_deserialize.loading"></div>
+  <p v-else-if="nodejs_deserialize.time">{{ nodejs_deserialize.time }} ms</p>
   <p v-else></p>
-  <div class="ping" v-if="python_write_parallel.loading"></div>
-  <p v-else-if="python_write_parallel.time">{{ python_write_parallel.time }} ms</p>
+  <div class="ping" v-if="python_deserialize.loading"></div>
+  <p v-else-if="python_deserialize.time">{{ python_deserialize.time }} ms</p>
   <p v-else></p>
 
   <TestDescriptionVue

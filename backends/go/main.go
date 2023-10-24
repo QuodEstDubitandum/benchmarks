@@ -132,5 +132,16 @@ func main(){
 		return time
 	})
 
+	app.Get("/json/serialize", func(c *fiber.Ctx) error {
+		sampleString := "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+		time := utils.MeasurePerformance(api.Serialize, &utils.Options{Context: c, N: 10000, Obj: utils.SerializeObject{A: sampleString, B: sampleString, C: sampleString, D: sampleString, E: sampleString, F: sampleString, G: sampleString, H: sampleString, I: sampleString, J: sampleString, K: sampleString, L: sampleString, M: sampleString, N: sampleString, O: sampleString, P: sampleString, Q: sampleString}}) 
+		return time
+	})
+
+	app.Post("/json/deserialize", func(c *fiber.Ctx) error {
+		time := utils.MeasurePerformance(api.Deserialize, &utils.Options{Context: c, N: 10000}) 
+		return time
+	})
+
 	app.Listen(":3001")
 }
