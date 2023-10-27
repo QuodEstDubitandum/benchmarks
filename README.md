@@ -1,46 +1,20 @@
 # Benchmarks
 
-This template should help get you started developing with Vue 3 in Vite.
+A repository to measure performance across different languages in respect to operations commonly used in backends. 
+Currently features Golang (with the Fiber Framework), NodeJS (with the Express Framework) and Python (with the Django Framework). 
 
-## Recommended IDE Setup
+Obviously some tests will tell you more about the strong and weak points of languages, whereas some others might be showing off 
+the difference between library implementations across different programming languages. 
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+As an exmaple: 
+Even though Golang is considered way faster than NodeJS and Python, the image decoding and encoding is slower than in NodeJS f.e. because 
+the underlying library in NodeJS commonly used for this (sharp) is probably written in C or C++ making it perform way better than standard NodeJS code.
 
-## Type Support for `.vue` Imports in TS
+The first table (measuring performance for algorithms) might be the best representation of how fast a certain language is, but I think it is also 
+fair to compare standard operations involving files, images and SQL queries to showcase that real-life performance including libraries written in different languages 
+and optimized differently can impact the speed of applications heavily and therefore making statements about application performance solely based on programming language used 
+is not a very good thing to do for complex applications.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+## More languages
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+In the future, Rust/Java/C# will be added as well.
