@@ -18,10 +18,16 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 
+def initiateQuicksortArray(N):
+    return [N-i for i in range(N-1,-1,-1)]
+
+def initiateTwoSumArray(N):
+    return [i+1 for i in range(0,N,1)]
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('algorithms/prime/', views.calculatePrimeNumbers),
-    path('algorithms/fast-fibonacci/', views.fastFibonacci),
-    path('algorithms/quicksort/', views.quickSort),
-    path('algorithms/two-sum/', views.twoSum)
+    path('algorithms/prime/', views.calculatePrimeNumbers, {"N": 10000000}),
+    path('algorithms/fast-fibonacci/', views.fastFibonacci, {"N": 1000000}),
+    path('algorithms/quicksort/', views.quickSort, {"N": 1000000, "Array": initiateQuicksortArray(1000000)}),
+    path('algorithms/two-sum/', views.twoSum, {"N": 1000000, "Array": initiateTwoSumArray(1000000)})
 ]
