@@ -33,18 +33,24 @@ async function getData(url: string) {
     let time: string
     switch (url) {
       case '/algorithms/prime':
-        go_prime.value.loading = true
-        nodejs_prime.value.loading = true
+        // go_prime.value.loading = true
+        // nodejs_prime.value.loading = true
+        python_prime.value.loading = true
 
-        res = await fetch('/go' + url, { method: 'GET' })
-        time = await res.text()
-        go_prime.value.time = time
-        go_prime.value.loading = false
+        // res = await fetch('/go' + url, { method: 'GET' })
+        // time = await res.text()
+        // go_prime.value.time = time
+        // go_prime.value.loading = false
 
-        res = await fetch('/nodejs' + url, { method: 'GET' })
+        // res = await fetch('/nodejs' + url, { method: 'GET' })
+        // time = await res.text()
+        // nodejs_prime.value.time = time
+        // nodejs_prime.value.loading = false
+
+        res = await fetch('/python' + url + '/', { method: 'GET' })
         time = await res.text()
-        nodejs_prime.value.time = time
-        nodejs_prime.value.loading = false
+        python_prime.value.time = time
+        python_prime.value.loading = false
         break
       case '/algorithms/fast-fibonacci':
         go_fibonacci.value.loading = true
