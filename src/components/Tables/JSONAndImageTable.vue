@@ -10,13 +10,13 @@ const go_deserialize = ref({ time: '', loading: false })
 const nodejs_deserialize = ref({ time: '', loading: false })
 const python_deserialize = ref({ time: '', loading: false })
 
-const go_read = ref({ time: '', loading: false })
-const nodejs_read = ref({ time: '', loading: false })
-const python_read = ref({ time: '', loading: false })
+const go_decode = ref({ time: '', loading: false })
+const nodejs_decode = ref({ time: '', loading: false })
+const python_decode = ref({ time: '', loading: false })
 
-const go_read_parallel = ref({ time: '', loading: false })
-const nodejs_read_parallel = ref({ time: '', loading: false })
-const python_read_parallel = ref({ time: '', loading: false })
+const go_encode = ref({ time: '', loading: false })
+const nodejs_encode = ref({ time: '', loading: false })
+const python_encode = ref({ time: '', loading: false })
 
 // global loading state to disable buttons f.e.
 const loading = ref(false)
@@ -89,33 +89,33 @@ async function getData(url: string) {
         nodejs_deserialize.value.time = time
         nodejs_deserialize.value.loading = false
         break
-      case '/files/read':
-        go_read.value.loading = true
-        nodejs_read.value.loading = true
+      case '/image/decode':
+        go_decode.value.loading = true
+        nodejs_decode.value.loading = true
 
         res = await fetch('/go' + url, { method: 'GET' })
         time = await res.text()
-        go_read.value.time = time
-        go_read.value.loading = false
+        go_decode.value.time = time
+        go_decode.value.loading = false
 
         res = await fetch('/nodejs' + url, { method: 'GET' })
         time = await res.text()
-        nodejs_read.value.time = time
-        nodejs_read.value.loading = false
+        nodejs_decode.value.time = time
+        nodejs_decode.value.loading = false
         break
-      case '/files/read-parallel':
-        go_read_parallel.value.loading = true
-        nodejs_read_parallel.value.loading = true
+      case '/image/encode':
+        go_encode.value.loading = true
+        nodejs_encode.value.loading = true
 
         res = await fetch('/go' + url, { method: 'GET' })
         time = await res.text()
-        go_read_parallel.value.time = time
-        go_read_parallel.value.loading = false
+        go_encode.value.time = time
+        go_encode.value.loading = false
 
         res = await fetch('/nodejs' + url, { method: 'GET' })
         time = await res.text()
-        nodejs_read_parallel.value.time = time
-        nodejs_read_parallel.value.loading = false
+        nodejs_encode.value.time = time
+        nodejs_encode.value.loading = false
         break
     }
   } catch (err) {
@@ -163,34 +163,34 @@ async function getData(url: string) {
   <TestDescriptionVue
     :loading="loading"
     :get-data="getData"
-    :url="'/files/read'"
-    :description="'Read NumOfCPUCores text files consisting of n=1.000.000 lines each synchronously'"
+    :url="'/image/decode'"
+    :description="'Decode a jpg image file'"
   />
   <div class="vertical-seperator"></div>
-  <div class="ping" v-if="go_read.loading"></div>
-  <p v-else-if="go_read.time">{{ go_read.time }} ms</p>
+  <div class="ping" v-if="go_decode.loading"></div>
+  <p v-else-if="go_decode.time">{{ go_decode.time }} ms</p>
   <p v-else></p>
-  <div class="ping" v-if="nodejs_read.loading"></div>
-  <p v-else-if="nodejs_read.time">{{ nodejs_read.time }} ms</p>
+  <div class="ping" v-if="nodejs_decode.loading"></div>
+  <p v-else-if="nodejs_decode.time">{{ nodejs_decode.time }} ms</p>
   <p v-else></p>
-  <div class="ping" v-if="python_read.loading"></div>
-  <p v-else-if="python_read.time">{{ python_read.time }} ms</p>
+  <div class="ping" v-if="python_decode.loading"></div>
+  <p v-else-if="python_decode.time">{{ python_decode.time }} ms</p>
   <p v-else></p>
 
   <TestDescriptionVue
     :loading="loading"
     :get-data="getData"
-    :url="'/files/read-parallel'"
-    :description="'Read NumOfCPUCores text files consisting of n=1.000.000 lines each in parallel'"
+    :url="'/image/encode'"
+    :description="'Encode a png image file'"
   />
   <div class="vertical-seperator"></div>
-  <div class="ping" v-if="go_read_parallel.loading"></div>
-  <p v-else-if="go_read_parallel.time">{{ go_read_parallel.time }} ms</p>
+  <div class="ping" v-if="go_encode.loading"></div>
+  <p v-else-if="go_encode.time">{{ go_encode.time }} ms</p>
   <p v-else></p>
-  <div class="ping" v-if="nodejs_read_parallel.loading"></div>
-  <p v-else-if="nodejs_read_parallel.time">{{ nodejs_read_parallel.time }} ms</p>
+  <div class="ping" v-if="nodejs_encode.loading"></div>
+  <p v-else-if="nodejs_encode.time">{{ nodejs_encode.time }} ms</p>
   <p v-else></p>
-  <div class="ping" v-if="python_read_parallel.loading"></div>
-  <p v-else-if="python_read_parallel.time">{{ python_read_parallel.time }} ms</p>
+  <div class="ping" v-if="python_encode.loading"></div>
+  <p v-else-if="python_encode.time">{{ python_encode.time }} ms</p>
   <p v-else></p>
 </template>

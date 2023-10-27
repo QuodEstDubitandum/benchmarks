@@ -22,6 +22,7 @@ export interface Context {
     q: string
   }
   deserializeString?: string
+  binaryImage?: Buffer
 }
 
 export async function measurePerformance(

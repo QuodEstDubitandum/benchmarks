@@ -6,6 +6,7 @@ import (
 	utils "benchmarks/utils"
 	"database/sql"
 	"fmt"
+	"image/jpeg"
 	"os"
 	"runtime"
 	"strings"
@@ -140,6 +141,24 @@ func main(){
 
 	app.Post("/json/deserialize", func(c *fiber.Ctx) error {
 		time := utils.MeasurePerformance(api.Deserialize, &utils.Options{Context: c, N: 10000}) 
+		return time
+	})
+
+	app.Get("/image/decode", func(c *fiber.Ctx) error {
+		time := utils.MeasurePerformance(api.DecodeImage, &utils.Options{Context: c, N: 10}) 
+		return time
+	})
+
+	app.Get("/image/encode", func(c *fiber.Ctx) error {
+		// decoding to get binary data for encoding
+		file, err := os.Open("../../public/sample.jpg")
+		if err != nil{
+			fmt.Println(err)
+		}
+		defer file.Close()
+
+		img, _ := jpeg.Decode(file)
+		time := utils.MeasurePerformance(api.EncodeImage, &utils.Options{Context: c, BinaryImage: img}) 
 		return time
 	})
 

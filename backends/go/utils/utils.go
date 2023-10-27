@@ -3,6 +3,7 @@ package utils
 import (
 	"database/sql"
 	"fmt"
+	"image"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -34,6 +35,7 @@ type Options struct{
 	Cores int
 	DB *sql.DB
 	Obj SerializeObject
+	BinaryImage image.Image
 }
 
 func MeasurePerformance(f func(opt *Options), opt *Options) error {
