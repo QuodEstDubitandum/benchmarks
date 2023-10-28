@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+import multiprocessing
 
 def initiateQuicksortArray(N):
     return [N-i for i in range(N-1,-1,-1)]
@@ -24,10 +25,17 @@ def initiateQuicksortArray(N):
 def initiateTwoSumArray(N):
     return [i+1 for i in range(0,N,1)]
 
+def getCores():
+    return multiprocessing.cpu_count()
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('algorithms/prime/', views.calculatePrimeNumbers, {"N": 10000000}),
     path('algorithms/fast-fibonacci/', views.fastFibonacci, {"N": 1000000}),
     path('algorithms/quicksort/', views.quickSort, {"N": 1000000, "Array": initiateQuicksortArray(1000000)}),
-    path('algorithms/two-sum/', views.twoSum, {"N": 1000000, "Array": initiateTwoSumArray(1000000)})
+    path('algorithms/two-sum/', views.twoSum, {"N": 1000000, "Array": initiateTwoSumArray(1000000)}),
+    path('files/read/', views.createAndReadFile, {"N": 1000000, "Cores": getCores()}),
+    path('files/read-parallel/', views.createAndReadFileParallel, {"N": 1000000, "Cores": getCores()}),
+    path('files/write/', views.writeFile, {"N": 10000, "Cores": getCores()}),
+    path('files/write-parallel/', views.writeFileParallel, {"N": 10000, "Cores": getCores()}),
 ]

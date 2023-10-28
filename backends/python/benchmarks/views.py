@@ -1,4 +1,6 @@
 from . import utils
+import os
+import threading
 
 # /algorithms/prime
 @utils.measurePerformance
@@ -90,3 +92,79 @@ def twoSum(request, *args, **kwargs):
         hashmap[number] = hashmap.get(number, 0) + 1
 
     print(count)
+
+# /files/read
+def createAndReadFile(request, *args, **kwargs):
+    # create the files first
+    content = 'Gotta go fast\n' * kwargs.get("N")
+    for i in range(kwargs.get("Cores")):
+        with open('test{}.txt'.format(i), 'w') as file:
+            file.write(content)
+    time = readFile(request, Cores=kwargs.get("Cores"))
+
+    for i in range(kwargs.get("Cores")):
+        os.remove('test{}.txt'.format(i))
+    
+    return time
+
+@utils.measurePerformance
+def readFile(request, *args, **kwargs):
+    for i in range(kwargs.get("Cores")):
+        with open('test{}.txt'.format(i), 'r') as file:
+            file.read()
+
+
+# /files/read-parallel
+def createAndReadFileParallel(request, *args, **kwargs):
+    # create the files first
+    content = 'Gotta go fast\n' * kwargs.get("N")
+    for i in range(kwargs.get("Cores")):
+        with open('test{}.txt'.format(i), 'w') as file:
+            file.write(content)
+    time = readFileParallel(request, Cores=kwargs.get("Cores"))
+
+    for i in range(kwargs.get("Cores")):
+        os.remove('test{}.txt'.format(i))
+    
+    return time
+
+@utils.measurePerformance
+def readFileParallel(request, *args, **kwargs):
+    threads = []
+    for i in range(kwargs.get("Cores")):
+        thread = threading.Thread(target=readFileThread, args=('test{}.txt'.format(i),))
+        threads.append(thread)
+        thread.start()
+    for thread in threads:
+        thread.join()
+
+def readFileThread(filename):
+    with open(filename, 'r') as file:
+        file.read()
+
+
+# /files/write
+@utils.measurePerformance
+def writeFile(request, *args, **kwargs):
+    for _ in range(kwargs.get("Cores")):
+        with open('test.txt', 'w') as file:
+            for _ in range(kwargs.get("N")):
+                file.write('Gotta go fast\n')
+        os.remove('test.txt')
+
+# /files/write-parallel
+@utils.measurePerformance
+def writeFileParallel(request, *args, **kwargs):
+    threads = []
+    for i in range(kwargs.get('Cores')):
+        thread = threading.Thread(target=writeFileThread, args=('test{}.txt'.format(i), kwargs.get('N')))
+        threads.append(thread)
+        thread.start()
+    for thread in threads:
+        thread.join()
+
+def writeFileThread(filename, n):
+    with open(filename, 'w') as file:
+        for _ in range(n):
+            file.write('Gotta go fast\n')
+    os.remove(filename)
