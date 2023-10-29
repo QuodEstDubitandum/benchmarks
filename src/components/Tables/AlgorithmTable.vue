@@ -33,19 +33,19 @@ async function getData(url: string) {
     let time: string
     switch (url) {
       case '/algorithms/prime':
-        // go_prime.value.loading = true
-        // nodejs_prime.value.loading = true
+        go_prime.value.loading = true
+        nodejs_prime.value.loading = true
         python_prime.value.loading = true
 
-        // res = await fetch('/go' + url, { method: 'GET' })
-        // time = await res.text()
-        // go_prime.value.time = time
-        // go_prime.value.loading = false
+        res = await fetch('/go' + url, { method: 'GET' })
+        time = await res.text()
+        go_prime.value.time = time
+        go_prime.value.loading = false
 
-        // res = await fetch('/nodejs' + url, { method: 'GET' })
-        // time = await res.text()
-        // nodejs_prime.value.time = time
-        // nodejs_prime.value.loading = false
+        res = await fetch('/nodejs' + url, { method: 'GET' })
+        time = await res.text()
+        nodejs_prime.value.time = time
+        nodejs_prime.value.loading = false
 
         res = await fetch('/python' + url + '/', { method: 'GET' })
         time = await res.text()
@@ -53,19 +53,19 @@ async function getData(url: string) {
         python_prime.value.loading = false
         break
       case '/algorithms/fast-fibonacci':
-        // go_fibonacci.value.loading = true
-        // nodejs_fibonacci.value.loading = true
+        go_fibonacci.value.loading = true
+        nodejs_fibonacci.value.loading = true
         python_fibonacci.value.loading = true
 
-        // res = await fetch('/go' + url, { method: 'GET' })
-        // time = await res.text()
-        // go_fibonacci.value.time = time
-        // go_fibonacci.value.loading = false
+        res = await fetch('/go' + url, { method: 'GET' })
+        time = await res.text()
+        go_fibonacci.value.time = time
+        go_fibonacci.value.loading = false
 
-        // res = await fetch('/nodejs' + url, { method: 'GET' })
-        // time = await res.text()
-        // nodejs_fibonacci.value.time = time
-        // nodejs_fibonacci.value.loading = false
+        res = await fetch('/nodejs' + url, { method: 'GET' })
+        time = await res.text()
+        nodejs_fibonacci.value.time = time
+        nodejs_fibonacci.value.loading = false
 
         res = await fetch('/python' + url + '/', { method: 'GET' })
         time = await res.text()
@@ -73,19 +73,19 @@ async function getData(url: string) {
         python_fibonacci.value.loading = false
         break
       case '/algorithms/quicksort':
-        // go_quicksort.value.loading = true
-        // nodejs_quicksort.value.loading = true
+        go_quicksort.value.loading = true
+        nodejs_quicksort.value.loading = true
         python_quicksort.value.loading = true
 
-        // res = await fetch('/go' + url, { method: 'GET' })
-        // time = await res.text()
-        // go_quicksort.value.time = time
-        // go_quicksort.value.loading = false
+        res = await fetch('/go' + url, { method: 'GET' })
+        time = await res.text()
+        go_quicksort.value.time = time
+        go_quicksort.value.loading = false
 
-        // res = await fetch('/nodejs' + url, { method: 'GET' })
-        // time = await res.text()
-        // nodejs_quicksort.value.time = time
-        // nodejs_quicksort.value.loading = false
+        res = await fetch('/nodejs' + url, { method: 'GET' })
+        time = await res.text()
+        nodejs_quicksort.value.time = time
+        nodejs_quicksort.value.loading = false
 
         res = await fetch('/python' + url + '/', { method: 'GET' })
         time = await res.text()
@@ -93,19 +93,19 @@ async function getData(url: string) {
         python_quicksort.value.loading = false
         break
       case '/algorithms/two-sum':
-        // go_two_sum.value.loading = true
-        // nodejs_two_sum.value.loading = true
+        go_two_sum.value.loading = true
+        nodejs_two_sum.value.loading = true
         python_two_sum.value.loading = true
 
-        // res = await fetch('/go' + url, { method: 'GET' })
-        // time = await res.text()
-        // go_two_sum.value.time = time
-        // go_two_sum.value.loading = false
+        res = await fetch('/go' + url, { method: 'GET' })
+        time = await res.text()
+        go_two_sum.value.time = time
+        go_two_sum.value.loading = false
 
-        // res = await fetch('/nodejs' + url, { method: 'GET' })
-        // time = await res.text()
-        // nodejs_two_sum.value.time = time
-        // nodejs_two_sum.value.loading = false
+        res = await fetch('/nodejs' + url, { method: 'GET' })
+        time = await res.text()
+        nodejs_two_sum.value.time = time
+        nodejs_two_sum.value.loading = false
 
         res = await fetch('/python' + url + '/', { method: 'GET' })
         time = await res.text()

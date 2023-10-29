@@ -33,19 +33,19 @@ async function getData(url: string) {
     let time: string
     switch (url) {
       case '/files/write':
-        // go_write.value.loading = true
-        // nodejs_write.value.loading = true
+        go_write.value.loading = true
+        nodejs_write.value.loading = true
         python_write.value.loading = true
 
-        // res = await fetch('/go' + url, { method: 'GET' })
-        // time = await res.text()
-        // go_write.value.time = time
-        // go_write.value.loading = false
+        res = await fetch('/go' + url, { method: 'GET' })
+        time = await res.text()
+        go_write.value.time = time
+        go_write.value.loading = false
 
-        // res = await fetch('/nodejs' + url, { method: 'GET' })
-        // time = await res.text()
-        // nodejs_write.value.time = time
-        // nodejs_write.value.loading = false
+        res = await fetch('/nodejs' + url, { method: 'GET' })
+        time = await res.text()
+        nodejs_write.value.time = time
+        nodejs_write.value.loading = false
 
         res = await fetch('/python' + url + '/', { method: 'GET' })
         time = await res.text()
@@ -53,19 +53,19 @@ async function getData(url: string) {
         python_write.value.loading = false
         break
       case '/files/write-parallel':
-        // go_write_parallel.value.loading = true
-        // nodejs_write_parallel.value.loading = true
+        go_write_parallel.value.loading = true
+        nodejs_write_parallel.value.loading = true
         python_write_parallel.value.loading = true
 
-        // res = await fetch('/go' + url, { method: 'GET' })
-        // time = await res.text()
-        // go_write_parallel.value.time = time
-        // go_write_parallel.value.loading = false
+        res = await fetch('/go' + url, { method: 'GET' })
+        time = await res.text()
+        go_write_parallel.value.time = time
+        go_write_parallel.value.loading = false
 
-        // res = await fetch('/nodejs' + url, { method: 'GET' })
-        // time = await res.text()
-        // nodejs_write_parallel.value.time = time
-        // nodejs_write_parallel.value.loading = false
+        res = await fetch('/nodejs' + url, { method: 'GET' })
+        time = await res.text()
+        nodejs_write_parallel.value.time = time
+        nodejs_write_parallel.value.loading = false
 
         res = await fetch('/python' + url + '/', { method: 'GET' })
         time = await res.text()
@@ -73,19 +73,19 @@ async function getData(url: string) {
         python_write_parallel.value.loading = false
         break
       case '/files/read':
-        // go_read.value.loading = true
-        // nodejs_read.value.loading = true
+        go_read.value.loading = true
+        nodejs_read.value.loading = true
         python_read.value.loading = true
 
-        // res = await fetch('/go' + url, { method: 'GET' })
-        // time = await res.text()
-        // go_read.value.time = time
-        // go_read.value.loading = false
+        res = await fetch('/go' + url, { method: 'GET' })
+        time = await res.text()
+        go_read.value.time = time
+        go_read.value.loading = false
 
-        // res = await fetch('/nodejs' + url, { method: 'GET' })
-        // time = await res.text()
-        // nodejs_read.value.time = time
-        // nodejs_read.value.loading = false
+        res = await fetch('/nodejs' + url, { method: 'GET' })
+        time = await res.text()
+        nodejs_read.value.time = time
+        nodejs_read.value.loading = false
 
         res = await fetch('/python' + url + '/', { method: 'GET' })
         time = await res.text()
@@ -93,19 +93,19 @@ async function getData(url: string) {
         python_read.value.loading = false
         break
       case '/files/read-parallel':
-        // go_read_parallel.value.loading = true
-        // nodejs_read_parallel.value.loading = true
+        go_read_parallel.value.loading = true
+        nodejs_read_parallel.value.loading = true
         python_read_parallel.value.loading = true
 
-        // res = await fetch('/go' + url, { method: 'GET' })
-        // time = await res.text()
-        // go_read_parallel.value.time = time
-        // go_read_parallel.value.loading = false
+        res = await fetch('/go' + url, { method: 'GET' })
+        time = await res.text()
+        go_read_parallel.value.time = time
+        go_read_parallel.value.loading = false
 
-        // res = await fetch('/nodejs' + url, { method: 'GET' })
-        // time = await res.text()
-        // nodejs_read_parallel.value.time = time
-        // nodejs_read_parallel.value.loading = false
+        res = await fetch('/nodejs' + url, { method: 'GET' })
+        time = await res.text()
+        nodejs_read_parallel.value.time = time
+        nodejs_read_parallel.value.loading = false
 
         res = await fetch('/python' + url + '/', { method: 'GET' })
         time = await res.text()

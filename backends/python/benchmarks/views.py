@@ -1,6 +1,12 @@
+from django.http import HttpResponse
 from . import utils
 import os
 import threading
+from .models import ElectricCars
+import json
+import timeit
+from PIL import Image
+import numpy as np
 
 # /algorithms/prime
 @utils.measurePerformance
@@ -168,3 +174,89 @@ def writeFileThread(filename, n):
         for _ in range(n):
             file.write('Gotta go fast\n')
     os.remove(filename)
+
+# /db/select
+@utils.measurePerformance
+def dbSelect(request, *args, **kwargs):
+    count = 0
+    for _ in range(kwargs.get('N')):
+        count = ElectricCars.objects.filter(vehicletype="BEV", model="MODEL 3").count()
+
+    print(count)
+
+# /db/insert
+def dbInsert(request, *args, **kwargs):
+    time = insertOnly(request, N=kwargs.get('N'))
+    # delete the inserts afterwards
+    ElectricCars.objects.filter(vin="test", county="test").delete()
+    return time
+
+@utils.measurePerformance
+def insertOnly(request, *args, **kwargs):
+    for _ in range(kwargs.get('N')):
+        ElectricCars.objects.create(
+            vin="test",
+            county="test",
+            city="test",
+            state="test",
+            postalcode=1,
+            modelyear=1,
+            make="test",
+            model="test",
+            vehicletype="test",
+            electricrange=1,
+            vehiclelocation="test"
+        )
+
+# /db/update
+@utils.measurePerformance
+def dbUpdate(request, *args, **kwargs):
+    ElectricCars.objects.filter(model="I3").update(model="I4")
+    ElectricCars.objects.filter(model="I4").update(model="I3")
+
+# /db/delete
+def dbDelete(request, *args, **kwargs):
+    time = 0
+    for _ in range(kwargs.get('N')):
+        ElectricCars.objects.create(
+            vin="test",
+            county="test",
+            city="test",
+            state="test",
+            postalcode=1,
+            modelyear=1,
+            make="test",
+            model="test",
+            vehicletype="test",
+            electricrange=1,
+            vehiclelocation="test"
+        )
+        time += int(timeit.timeit(deleteOnly, number=1)*1000)
+    return HttpResponse(time//5)
+
+def deleteOnly():
+    ElectricCars.objects.filter(vin="test", county="test").delete()
+
+# /json/serialize
+@utils.measurePerformance
+def serialize(request, *args, **kwargs):
+    for _ in range(kwargs.get('N')):
+        json.dumps(kwargs.get("Object"))
+
+# /json/deserialize
+@utils.measurePerformance
+def deserialize(request, *args, **kwargs):
+    for _ in range(kwargs.get('N')):
+        json.loads(request.body)
+
+# /image/decode
+@utils.measurePerformance
+def decode(request, *args, **kwargs):
+    for _ in range(kwargs.get('N')):
+        np.array(Image.open('../../public/sample.jpg'))
+
+# /image/encode
+@utils.measurePerformance
+def encode(request, *args, **kwargs):
+    image = kwargs.get("Image")
+    image.save('../../public/sample.png', "PNG")

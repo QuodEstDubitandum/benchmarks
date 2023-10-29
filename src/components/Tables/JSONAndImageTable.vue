@@ -56,6 +56,7 @@ async function getData(url: string) {
       case '/json/serialize':
         go_serialize.value.loading = true
         nodejs_serialize.value.loading = true
+        python_serialize.value.loading = true
 
         res = await fetch('/go' + url, { method: 'GET' })
         time = await res.text()
@@ -66,10 +67,16 @@ async function getData(url: string) {
         time = await res.text()
         nodejs_serialize.value.time = time
         nodejs_serialize.value.loading = false
+
+        res = await fetch('/python' + url + '/', { method: 'GET' })
+        time = await res.text()
+        python_serialize.value.time = time
+        python_serialize.value.loading = false
         break
       case '/json/deserialize':
         go_deserialize.value.loading = true
         nodejs_deserialize.value.loading = true
+        python_deserialize.value.loading = true
 
         res = await fetch('/go' + url, {
           method: 'POST',
@@ -88,10 +95,20 @@ async function getData(url: string) {
         time = await res.text()
         nodejs_deserialize.value.time = time
         nodejs_deserialize.value.loading = false
+
+        res = await fetch('/python' + url + '/', {
+          method: 'POST',
+          body: JSON.stringify(deserializeObject),
+          headers: { 'Content-Type': 'application/json' }
+        })
+        time = await res.text()
+        python_deserialize.value.time = time
+        python_deserialize.value.loading = false
         break
       case '/image/decode':
         go_decode.value.loading = true
         nodejs_decode.value.loading = true
+        python_decode.value.loading = true
 
         res = await fetch('/go' + url, { method: 'GET' })
         time = await res.text()
@@ -102,10 +119,16 @@ async function getData(url: string) {
         time = await res.text()
         nodejs_decode.value.time = time
         nodejs_decode.value.loading = false
+
+        res = await fetch('/python' + url + '/', { method: 'GET' })
+        time = await res.text()
+        python_decode.value.time = time
+        python_decode.value.loading = false
         break
       case '/image/encode':
         go_encode.value.loading = true
         nodejs_encode.value.loading = true
+        python_encode.value.loading = true
 
         res = await fetch('/go' + url, { method: 'GET' })
         time = await res.text()
@@ -116,6 +139,11 @@ async function getData(url: string) {
         time = await res.text()
         nodejs_encode.value.time = time
         nodejs_encode.value.loading = false
+
+        res = await fetch('/python' + url + '/', { method: 'GET' })
+        time = await res.text()
+        python_encode.value.time = time
+        python_encode.value.loading = false
         break
     }
   } catch (err) {
