@@ -28,4 +28,8 @@ to automatically recompile the source code since Go is not an interpreted langua
 3) For Python, please install python as well as django, Pillow and django-cors-headers. 
 4) For the frontend, install the necessary packages using npm i.
 
-I recomment using VSC tasks to start up all 4 servers (I pushed the task to the repository as well, you can just start it up like that).
+I recommend using VSC tasks to start up all 4 servers (I pushed the task to the repository as well, you can just start it up like that).
+
+## Suggestions
+
+As for suggestions and possible unfair tests made as well as people wanting to help out by adding more tests/languages, you can contact me at d.steblin.dev@gmail.com.
