@@ -18,3 +18,14 @@ is not a very good thing to do for complex applications.
 ## More languages
 
 In the future, Rust/Java/C# will be added as well.
+
+## Usage 
+
+To use this code locally, you must ensure to install a few things beforehand: 
+1) For Go, you need to install the language itself as well as air (when using VSC tasks, see below), which is a tool used 
+to automatically recompile the source code since Go is not an interpreted language.
+2) For NodeJS, you will obviously need node as well as run "npm i" to install the necessary packages.
+3) For Python, please install python as well as django, Pillow and django-cors-headers. 
+4) For the frontend, install the necessary packages using npm i.
+
+I recomment using VSC tasks to start up all 4 servers (I pushed the task to the repository as well, you can just start it up like that).
