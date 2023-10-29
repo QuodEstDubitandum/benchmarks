@@ -12,11 +12,11 @@ const props = defineProps({
     <p style="font-size: small">{{ props.description }}</p>
     <div style="margin-bottom: 27px"></div>
     <i
-      class="fa-solid fa-circle-play fa-xl"
+      class="fas fa-circle-play fa-xl"
       style="color: green; cursor: pointer"
       v-if="!props.loading"
       @click="props.getData!(props.url)"
     ></i>
-    <i class="fa-solid fa-circle-play fa-xl" style="color: grey" v-else></i>
+    <i class="fas fa-circle-play fa-xl" style="color: grey" v-else></i>
   </div>
 </template>
